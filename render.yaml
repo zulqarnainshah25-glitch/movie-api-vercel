@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: movie-api
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: PROXY_URL
+        value: "http://45.132.102.162:80"
