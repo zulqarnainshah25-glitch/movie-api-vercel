@@ -517,3 +517,32 @@ async def dashboard():
     pass
 
 # Baki routes (/search, /api/stream waghera) jo aapke purane code mein thay, woh yahan rahenge.
+# --- YEH CODE APP.PY KE SABSE AAKHIR MEIN PASTE KAREIN ---
+
+@app.get("/search")
+def search_endpoint(q: str, page: int = 1, per_page: int = 20):
+    try:
+        return engine.search(q, page, per_page)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/stream/{subject_id}")
+def stream_endpoint(subject_id: str, se: int = 0, ep: int = 0, detail_path: str = None):
+    try:
+        return engine.get_streams(subject_id, se, ep, detail_path)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/stream/{subject_id}/captions")
+def captions_endpoint(subject_id: str, stream_id: str = None, se: int = 0, ep: int = 0):
+    try:
+        return engine.get_subtitles(subject_id, stream_id, se, ep)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/episodes/{subject_id}")
+def episodes_endpoint(subject_id: str):
+    try:
+        return engine.get_episodes(subject_id)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
