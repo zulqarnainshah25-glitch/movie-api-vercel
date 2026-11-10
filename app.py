@@ -204,9 +204,9 @@ class MovieBoxEngine:
         self.device_id = generate_device_id()
         self.bearer_token: Optional[str] = None
         if cr:
-            self.session = cr.Session(impersonate="chrome120", proxies={"http": PROXY_URL, "https": PROXY_URL} if PROXY_URL else None)
-        else:
-            self.session = httpx.Client(timeout=25, follow_redirects=True, proxies={"http://": PROXY_URL, "https://": PROXY_URL} if PROXY_URL else None)
+    self.session = cr.Session(impersonate="chrome124") # Latest Chrome impersonation
+else:
+    self.session = httpx.Client(timeout=25, follow_redirects=True)
 
     @classmethod
     def get_instance(cls) -> "MovieBoxEngine":
