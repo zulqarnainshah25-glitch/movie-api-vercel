@@ -204,9 +204,9 @@ class MovieBoxEngine:
         self.device_id = generate_device_id()
         self.bearer_token: Optional[str] = None
         if cr:
-    self.session = cr.Session(impersonate="chrome124") # Latest Chrome impersonation
-else:
-    self.session = httpx.Client(timeout=25, follow_redirects=True)
+            self.session = cr.Session(impersonate="chrome124")
+        else:
+            self.session = httpx.Client(timeout=25, follow_redirects=True)
 
     @classmethod
     def get_instance(cls) -> "MovieBoxEngine":
